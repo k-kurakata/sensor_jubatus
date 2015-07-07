@@ -43,7 +43,7 @@ class LuxClassifier():
 
         # for line in dic_pre:
         #     value = dic_pre[line]['value']
-        #     data.append(Datum({'value':value}))
+        #     data.append(Datum({'Value':value}))
 
         data = [
                 Datum({'Value':250}),

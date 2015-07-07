@@ -41,17 +41,17 @@ class LuxClassifier():
         data = []
         predict_result = []
 
-        # for line in dic_pre:
-        #     value = dic_pre[line]['value']
-        #     data.append(Datum({'value':value}))
+        for line in dic_pre:
+            value = dic_pre[line]['value']
+            data.append(Datum({'Value':value}))
 
-        data = [
-                Datum({'Value':250}),
-                Datum({'Value':290}),
-                Datum({'Value':230}),
-                Datum({'Value':841}),
-                Datum({'Value':818}),
-                ]
+        # data = [
+        #         Datum({'Value':250}),
+        #         Datum({'Value':290}),
+        #         Datum({'Value':230}),
+        #         Datum({'Value':841}),
+        #         Datum({'Value':818}),
+        #         ]
         
         for d in data:
             res = client.classify([d])
