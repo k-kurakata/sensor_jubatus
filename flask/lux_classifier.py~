@@ -47,7 +47,7 @@ class LuxClassifier():
         
         for d in data:
             res = client.classify([d])
-            # getmongo.postDB(max(res[0], key=lambda x: x.score).label, str(d.num_values[0][1]))
+            getmongo.postDB(max(res[0], key=lambda x: x.score).label, str(d.num_values[0][1]))
             #
             sys.stdout.write(max(res[0], key=lambda x: x.score).label)
             sys.stdout.write(' ')

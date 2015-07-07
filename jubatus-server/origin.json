@@ -2,12 +2,13 @@
   "method": "AROW",
   "converter" : {
     "num_filter_types": {
+      "absolute": {"method": "gaussian_normalization", "average": "537", "standard_deviation":"128"}
     },
-    "num_filter_rules": [],
+    "num_filter_rules": [{"key" : "*", "type" : "absolute", "suffix" : "gaussian_normalized"}],
     "string_filter_types": {},
     "string_filter_rules": [],
     "num_types": {},
-    "num_rules": [{"key" : "*", "type" : "str"}],
+    "num_rules": [{"key" : "*", "type" : "log"}],
     "string_types": {},
     "string_rules": []
   },
