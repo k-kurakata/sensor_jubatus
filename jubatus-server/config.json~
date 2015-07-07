@@ -13,6 +13,6 @@
     "string_rules": []
   },
   "parameter":{
-    "regularization_weight" : 10.0
+    "regularization_weight" : 1.0
   }
 }

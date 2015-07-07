@@ -41,9 +41,17 @@ class LuxClassifier():
         data = []
         predict_result = []
 
-        for line in dic_pre:
-            value = dic_pre[line]['value']
-            data.append(Datum({'value':value}))
+        # for line in dic_pre:
+        #     value = dic_pre[line]['value']
+        #     data.append(Datum({'value':value}))
+
+        data = [
+                Datum({'Value':250}),
+                Datum({'Value':290}),
+                Datum({'Value':230}),
+                Datum({'Value':841}),
+                Datum({'Value':818}),
+                ]
         
         for d in data:
             res = client.classify([d])
@@ -54,9 +62,9 @@ class LuxClassifier():
             sys.stdout.write(str(d.num_values[0][1]))
             sys.stdout.write('\n')
 
-        #     predict_result.append(max(res[0], key=lambda x: x.score).label)
-        #
-        # return predict_result
+            predict_result.append(max(res[0], key=lambda x: x.score).label)
+        
+        return predict_result
 
 if __name__ == '__main__':
     # connect to the jubatus
