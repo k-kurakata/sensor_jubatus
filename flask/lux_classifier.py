@@ -63,4 +63,4 @@ if __name__ == '__main__':
     client = jubatus.Classifier(host, port, name)
     lux_classifier = LuxClassifier()
     lux_classifier.train(client)
-    lux_classifier.predict(client)
+    # lux_classifier.predict(client)

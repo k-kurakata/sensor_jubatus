@@ -23,7 +23,7 @@ def index():
 
     title = u"ようこそ"
     results = lux_classifier.predict(client)
-    result = results[100]
+    result = results
     # index.html をレンダリングする
     return render_template('hello.html',
                            result=result, title=title)
