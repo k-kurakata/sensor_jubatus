@@ -40,7 +40,11 @@ def post():
         jubatus_server_port = request.form['jubatus_server_port']
 
         return render_template('hello.html',
-                               name=jubatus_server_ip, title=title)
+                               jubatus_server_ip   = jubatus_server_ip,
+                               jubatus_server_port = jubatus_server_port,
+                               mongo_server_ip     = mongo_server_ip,
+                               mongo_server_port   = mongo_server_port,
+                               )
     else:
         # エラーなどでリダイレクトしたい場合はこんな感じで
         return redirect(url_for('hello'))
