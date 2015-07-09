@@ -2,38 +2,51 @@
 {% block content %}
 <!doctype html>
 <title>Hello form Falsk</title>
-{% if result %}
-<h1>{{ result }}</h1>
+{% if jubatus_server_ip %}
+<h1>{{ jubatus_server_ip }}</h1>
 {% else %}
 <h1>Hello World!</h1>
 {% endif %}
+<!-- <form action="/post" method="post">                                                   -->
+<!--   <div>                                                                               -->
+<!--     <label for="hoge">input</label>                                                   -->
+<!--     <input type="text" class="form-control" id="name" name="hoge" placeholder="Name"> -->
+<!--   </div>                                                                              -->
+<!--   <div>                                                                               -->
+<!--     <label for="fuga">input</label>                                                   -->
+<!--     <input type="text" class="form-control" id="name" name="fuga" placeholder="Name"> -->
+<!--   </div>                                                                              -->
+<!--   <div class="button">                                                                -->
+<!--     <button type="submit" class="btn btn-default">submit</button>                     -->
+<!--   </div>                                                                              -->
+<!-- </form>                                                                               -->
 
 <form action="/post" method="post">
   <!-- MongoDB -->
   <h2>MongoDB</h2>
   <div>
-    <label for="mongo_server_ip">ServerIP</label>
-    <input type="text" id="mongo_server_ip">
+  <label for="mongo_server_ip">ServerIP</label>
+  <input type="text" id="mongo_server_ip" name="mongo_server_ip" />
   </div>
   <div>
-    <label for="mongo_server_port">Port</label>
-    <input type="text" id="mongo_server_port">
+  <label for="mongo_server_port">Port</label>
+  <input type="text" id="mongo_server_port" name="mongo_server_port"/>
   </div>
  
   <!-- jubatus -->
   <h2>Jubatus</h2>
   <div>
-    <label for="jubatus_server_ip">ServerIP</label>
-    <input type="text" id="jubatus_server_ip">
+  <label for="jubatus_server_ip">ServerIP</label>
+  <input type="text" id="jubatus_server_ip" name="jubatus_server_ip"/>
   </div>
-  <div>
-    <label for="jubatus_server_port">Port</label>
-    <input type="text" id="jubatus_server_port">
-  </div>
+<div>
+<label for="jubatus_server_port">Port</label>
+<input type="text" id="jubatus_server_port" name="jubatus_server_port"/>
+</div>
 
-  <div class="button">
-    <button type="submit">confirm</button>
-  </div>
+<div class="button">
+<button type="submit">confirm</button>
+</div>
 
 </form>
 {% endblock %}

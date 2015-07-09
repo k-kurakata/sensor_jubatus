@@ -10,37 +10,36 @@ from lux_classifier import LuxClassifier
 # 自身の名称を app という名前でインスタンス化する
 app = Flask(__name__)
 
-jubatus_server_ip = '127.0.0.1' 
-jubatus_server_port = 9199 
-name = 'test2'
+# メッセージをランダムに表示するメソッド
+def picked_up():
+    host = '192.168.33.10'
+    port = 9199
+    name = 'test2'
 
-hoge = ''
+    client = jubatus.Classifier(host, port, name)
+    lux_classifier = LuxClassifier()
+    return lux_classifier.predict(client)
 
 # ここからウェブアプリケーション用のルーティングを記述
 # index にアクセスしたときの処理
 @app.route('/')
 def index():
-    # client = jubatus.Classifier(jubatus_server_ip, jubatus_server_port, name)
-    # lux_classifier = LuxClassifier()
-    #
     title = u"ようこそ"
-    # results = lux_classifier.predict(client)
-    # result = results
+    message = 'hello'
+    # index.html をレンダリングする
     return render_template('hello.html',
-                           name=name, title=title)
+                           message=message, title=title)
 #
-# # /post にアクセスしたときの処理
+# /post にアクセスしたときの処理
 @app.route('/post', methods=['GET', 'POST'])
 def post():
     title = u"こんにちは"
     if request.method == 'POST':
-        mongo_server_ip     = request.form['mongo_server_ip']
-        mongo_server_port   = request.form['mongo_server_port']
-        jubatus_server_ip   = request.form['jubatus_server_ip']
-        jubatus_server_port = request.form['jubatus_server_port']
-
+        # リクエストフォームから「名前」を取得して
+        name = request.form['name']
+        # index.html をレンダリングする
         return render_template('hello.html',
-                               name=jubatus_server_ip, title=title)
+                               name=name, title=title)
     else:
         # エラーなどでリダイレクトしたい場合はこんな感じで
         return redirect(url_for('hello'))
