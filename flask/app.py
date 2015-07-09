@@ -44,7 +44,7 @@ def post():
                                jubatus_server_port = jubatus_server_port,
                                mongo_server_ip     = mongo_server_ip,
                                mongo_server_port   = mongo_server_port,
-                               result              = result_list)
+                               result_list         = result_list)
     else:
         # エラーなどでリダイレクトしたい場合はこんな感じで
         return redirect(url_for('hello'))

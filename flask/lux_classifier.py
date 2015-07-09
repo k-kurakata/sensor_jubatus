@@ -55,12 +55,14 @@ class LuxClassifier():
             sys.stdout.write('\n')
 
             hoge = str(d.num_values[0][1])
-            predict_result.append({(max(res[0], key=lambda x: x.score).label) : hoge})
+            predict_result.append({'Result': (max(res[0], key=lambda x: x.score).label), 
+                                   'Value'  : hoge})
+
         return predict_result
 
 if __name__ == '__main__':
     # connect to the jubatus
     client = jubatus.Classifier(host, port, name)
     lux_classifier = LuxClassifier()
-    lux_classifier.train(client)
-    # lux_classifier.predict(client)
+    # lux_classifier.train(client)
+    lux_classifier.predict(client)
