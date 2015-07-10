@@ -1,0 +1,19 @@
+//サーバ作成
+var io = require('socket.io')(8080);
+
+//クライアント接続があると、以下の処理を実行
+io.on('connection', function(socket){
+
+  //接続通知をクライアントに通知
+  io.emit("sendMessageToClient", {value:"1人入室しました。"});
+
+  //クライアントからの受信イベントを設定
+  socket.on("sendMessageToServer", function(data){
+    io.emit("sendMessageToClient", {value:data.value});
+  });
+
+  //接続切れイベントを設定
+  socket.on("disconnect", function(){
+    io.emit("sendMessageToClient", {value:"1人退出しました"});
+  });
+});
