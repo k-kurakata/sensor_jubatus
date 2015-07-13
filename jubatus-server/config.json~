@@ -2,7 +2,7 @@
   "method": "AROW",
   "converter" : {
     "num_filter_types": {
-      "absolute": {"method": "gaussian_normalization", "average": "537", "standard_deviation":"128"}
+      "absolute": {"method": "gaussian_normalization", "average": "292", "standard_deviation":"98"}
     },
     "num_filter_rules": [{"key" : "*", "type" : "absolute", "suffix" : "gaussian_normalized"}],
     "string_filter_types": {},
@@ -13,6 +13,6 @@
     "string_rules": []
   },
   "parameter":{
-    "regularization_weight" : 1.0
+    "regularization_weight" : 10.0
   }
 }

@@ -42,7 +42,7 @@ class LuxClassifier():
         predict_result = []
 
         for line in dic_pre:
-            value = dic_pre[line]['value']
+            value = dic_pre[line]['Value']
             data.append(Datum({'Value':value}))
         
         for d in data:
@@ -64,5 +64,5 @@ if __name__ == '__main__':
     # connect to the jubatus
     client = jubatus.Classifier(host, port, name)
     lux_classifier = LuxClassifier()
-    # lux_classifier.train(client)
+    lux_classifier.train(client)
     lux_classifier.predict(client)
