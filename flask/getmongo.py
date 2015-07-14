@@ -1,6 +1,8 @@
 # usr/bin/env python
 # -*- coding:utf-8 -*-
 
+import matplotlib.pyplot as plt
+import pandas as pd
 from pymongo import MongoClient
 import json
 
@@ -25,3 +27,11 @@ class convertMongo:
     
     def postDB(self, result, value):
         pre.insert({'result':result, 'value':value})
+
+    def getTable(self, dic):
+        df = pd.DataFrame(dic)
+        return df
+
+    # if __name__ == "__main__":
+    #     dic = getTrainSensorsDic()
+    #     print getTable(dic)

@@ -4,7 +4,7 @@
 <title>Hello form Falsk</title>
 
 <form action="/post" method="post">
-  <!-- jubatus -->
+  <!-- jubatusの入力フォーム -->
   <h2>Jubatus</h2>
   <div>
     <label for="jubatus_server_ip">ServerIP</label>
@@ -13,7 +13,7 @@
     <input type="text" id="jubatus_server_port" name="jubatus_server_port"/>
   </div>
 
-  <!-- MongoDB -->
+  <!-- MongoDBの入力フォーム -->
   <h2>MongoDB</h2>
   <div>
     <label for="mongo_server_ip">ServerIP</label>
@@ -37,6 +37,11 @@
   </div>
 
 </form>
+
+<!-- データフレームの表示 -->
+<!-- {% if data_frame %} -->
+<!--   {{ data_frame }}  -->
+<!-- {% endif %}         -->
 
 <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
   <tr>

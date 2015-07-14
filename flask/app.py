@@ -4,6 +4,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import numpy as np
 import jubatus
+from getmongo import convertMongo
 
 from lux_classifier import LuxClassifier
 
@@ -30,14 +31,20 @@ def post():
         jubatus_server_port = request.form['jubatus_server_port']
         db_name             = request.form['jubatus_server_port']
         collection_name     = request.form['jubatus_server_port']
-
         # POSTで得られる値はstr型なのでintに変換する
         jubatus_server_port = int(jubatus_server_port)
         mongo_server_port   = int(mongo_server_port)
 
+        # jubaclassifierのpredict取得
         client = jubatus.Classifier(jubatus_server_ip, jubatus_server_port, name)
         lux_classifier = LuxClassifier()
         result_list = lux_classifier.predict(client)
+
+        # データフレームの取得
+        convert_mongo = convertMongo()
+        train_sensors_dic = convert_mongo.getTrainSensorsDic()
+        data_frame        = convert_mongo.getTable(train_sensors_dic)
+        print data_frame
 
         return render_template('hello.html',
                                jubatus_server_ip   = jubatus_server_ip,
