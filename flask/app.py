@@ -44,6 +44,7 @@ def post():
         convert_mongo = convertMongo()
         train_sensors_dic = convert_mongo.getTrainSensorsDic()
         data_frame        = convert_mongo.getTable(train_sensors_dic)
+        # とりあえずターミナル上に表示
         print data_frame
 
         return render_template('hello.html',
