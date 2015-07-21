@@ -1,5 +1,5 @@
 {
-  "method": "AROW",
+  "method": "lof",
   "converter" : {
     "num_filter_types": {
       "absolute": {"method"            : "gaussian_normalization", 
@@ -15,7 +15,15 @@
     "string_types": {},
     "string_rules": []
   },
-  "parameter":{
-    "regularization_weight" : 10.0
+  
+  "parameter" : {
+  "nearest_neighbor_num" : 10,
+  "reverse_nearest_neighbor_num" : 30,
+  "method" : "euclid_lsh",
+  "parameter" : { "hash_num"   : 8,   "table_num"         : 16,
+                  "probe_num"  : 64,  "bin_width"         : 10,
+                  "seed"       : 1234,"retain_projection" : true
   }
+ }
 }
+

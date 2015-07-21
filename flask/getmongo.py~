@@ -17,6 +17,7 @@ class convertMongo:
     i = 0
 
     for data in sensors_collection.find():
+        train_sensors_dic[i]['time'] = data['_id'].generation_time
         del data['_id']
         json_list  = json.dumps(data)
         train_sensors_dic[i] = json.loads(json_list)
@@ -32,6 +33,6 @@ class convertMongo:
         df = pd.DataFrame(dic)
         return df
 
-    if __name__ == "__main__":
-        dic = getTrainSensorsDic()
-        print getTable(dic)
+if __name__ == '__main__':
+    convert_mongo = convertMongo()
+    print convert_mongo.getTrainSensorsDic()

@@ -1,25 +1,74 @@
 {% extends "layout.html" %}
 {% block content %}
-  <!-- Form
-  ================================================== -->
-<div class="form">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <p class="lead">
-          {% if name %}
-            Hello{{ name }} 
-          {% else %}
-            {{ message }}
-          {% endif %}
-        </p>
-        <form action="/post" method="post" class="form-inline">
-          <label for="name">input</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-          <button type="submit" class="btn btn-default">submit</button>
-        </form>
-      </div>
-    </div>
+<!doctype html>
+<title>Hello form Falsk</title>
+
+<form action="/post" method="post">
+  <!-- jubatusの入力フォーム -->
+  <h2>Jubatus</h2>
+  <div>
+    <label for="jubatus_server_ip">ServerIP</label>
+    <input type="text" id="jubatus_server_ip" name="jubatus_server_ip"/>
+    <label for="jubatus_server_port">Port</label>
+    <input type="text" id="jubatus_server_port" name="jubatus_server_port"/>
   </div>
-</div>
+
+  <!-- MongoDBの入力フォーム -->
+  <h2>MongoDB</h2>
+  <div>
+    <label for="mongo_server_ip">ServerIP</label>
+    <input type="text" id="mongo_server_ip" name="mongo_server_ip" />
+  </div>
+  <div>
+    <label for="mongo_server_port">port</label>
+    <input type="text" id="mongo_server_port" name="mongo_server_port"/>
+  </div>
+  <div>
+    <label for="db_name">DB Name</label>
+    <input type="text" id="db_name" name="db_name"/>
+  </div>
+  <div>
+    <label for="collection_name">Collection Name</label>
+    <input type="text" id="collection_name" name="collection_name"/>
+  </div>
+
+  <div class="button">
+    <button type="submit">confirm</button>
+  </div>
+
+</form>
+
+<!-- データフレームの表示 -->
+<!-- {% if data_frame %} -->
+<!--   {{ data_frame }}  -->
+<!-- {% endif %}         -->
+
+<table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
+  <tr>
+    <th bgcolor="#EE0000"><font color="#FFFFFF">Value</font></th>
+    <th bgcolor="#EE0000" width="150"><font color="#FFFFFF">Result</font></th>
+  </tr>
+
+  <!-- Valueのカラム -->
+  <tr>
+  {% if result_list %}
+    {% for a in result_list %}
+      <td bgcolor="#99CC00" align="right" nowrap>
+        {{ result_list[loop.index0]['Value'] }}
+     </td>
+    {% endfor %}
+  {% endif %}
+   
+  <!-- Resultのカラム -->
+  {% if result_list %}
+    {% for a in result_list %}
+      <td bgcolor="#FFFFFF" valign="top" width="150">
+        {{ result_list[loop.index0]['Result'] }}
+      </td>
+    {% endfor %}
+  {% endif %}
+
+  </tr>
+</table>
+
 {% endblock %}

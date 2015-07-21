@@ -17,13 +17,13 @@ name = 'test2'
 # index にアクセスしたときの処理
 @app.route('/')
 def index():
-    title = u"ようこそ"
-    return render_template('hello.html',
+    title = u"IoT + Machine learning"
+    return render_template('index.html',
                            name=name, title=title)
 #
 @app.route('/post', methods=['GET', 'POST'])
 def post():
-    title = u"こんにちは"
+    title = u"Predict"
     if request.method == 'POST':
         mongo_server_ip     = request.form['mongo_server_ip']
         mongo_server_port   = request.form['mongo_server_port']
@@ -44,9 +44,12 @@ def post():
         convert_mongo = convertMongo()
         train_sensors_dic = convert_mongo.getTrainSensorsDic()
         data_frame        = convert_mongo.getTable(train_sensors_dic)
+
+        # とりあえずターミナル上に表示
         print data_frame
 
-        return render_template('hello.html',
+        return render_template('index.html',
+                               title               = title,
                                jubatus_server_ip   = jubatus_server_ip,
                                jubatus_server_port = jubatus_server_port,
                                mongo_server_ip     = mongo_server_ip,

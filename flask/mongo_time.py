@@ -17,9 +17,7 @@ class convertMongo:
     i = 0
 
     for data in sensors_collection.find():
-        del data['_id']
-        json_list  = json.dumps(data)
-        train_sensors_dic[i] = json.loads(json_list)
+        train_sensors_dic[i] = data['_id'].generation_time
         i += 1
 
     def getTrainSensorsDic(self):
