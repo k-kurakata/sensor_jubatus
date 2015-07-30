@@ -18,23 +18,6 @@ from getpre import preMongo
 
 class LuxClassifier():
 
-    # def train(self, client):
-    #     train_sensors_dic = getmongo.getTrainSensorsDic()
-    #     train_sensor_data = []
-    #     value = 0
-    #
-    #     for line in train_sensors_dic:
-    #         value  = train_sensors_dic[line]['Value']
-    #         result = train_sensors_dic[line]['Result']
-    #         train_sensor_data.append((result, Datum({'Value': value})))
-    #
-    #     # training data must be shuffled on online learning!
-    #     random.shuffle(train_sensor_data)
-    #
-    #     # run train
-    #     client.train(train_sensor_data)
-    #     print 'Train Complete!'
-
     def predict(self, client):
         getpre  = preMongo()
         dic_pre = getpre.getDic()
@@ -56,16 +39,13 @@ class LuxClassifier():
 
             hoge = str(d.num_values[0][1])
             result = max(res[0], key=lambda x: x.score).label   
-            predict_result.append({'Result': result, 
+            predict_result.update({'Result': result, 
                                    'Value'  : hoge})
-            print predict_result['Result']
 
-        return predict_result
+        return predict_result['Result']
 
 if __name__ == '__main__':
     # connect to the jubatus
     client = jubatus.Classifier(host, port, name)
     lux_classifier = LuxClassifier()
-    # lux_classifier.train(client)
-    while True:
-        lux_classifier.predict(client)
+    print lux_classifier.predict(client)

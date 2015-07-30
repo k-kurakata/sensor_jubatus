@@ -1,29 +1,18 @@
 {
-  "method": "lof",
+  "method": "AROW",
   "converter" : {
     "num_filter_types": {
-      "absolute": {"method"            : "gaussian_normalization", 
-                   "average"           : "292", 
-                   "standard_deviation": "98"}},
-    "num_filter_rules": [{"key"    : "*", 
-                          "type"   : "absolute",
-                          "suffix" : "gaussian_normalized"}],
+      "absolute": {"method": "gaussian_normalization", "average": "537", "standard_deviation":"128"}
+    },
+    "num_filter_rules": [{"key" : "*", "type" : "absolute", "suffix" : "gaussian_normalized"}],
     "string_filter_types": {},
     "string_filter_rules": [],
     "num_types": {},
-    "num_rules": [{"key" : "*", "type" : "num"}],
+    "num_rules": [{"key" : "*", "type" : "log"}],
     "string_types": {},
     "string_rules": []
   },
-  
-  "parameter" : {
-  "nearest_neighbor_num" : 10,
-  "reverse_nearest_neighbor_num" : 30,
-  "method" : "euclid_lsh",
-  "parameter" : { "hash_num"   : 8,   "table_num"         : 16,
-                  "probe_num"  : 64,  "bin_width"         : 10,
-                  "seed"       : 1234,"retain_projection" : true
+  "parameter":{
+    "regularization_weight" : 1.0
   }
- }
 }
-
