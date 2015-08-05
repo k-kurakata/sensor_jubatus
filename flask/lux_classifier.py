@@ -18,8 +18,9 @@ getmongo = convertMongo()
 
 class LuxClassifier():
 
-    def train(self, client, mongo_ip, mongo_port, db_name):
-        train_sensors_dic = getmongo.getTrainSensorsDic(mongo_ip, mongo_port, db_name)
+    def train(self, client, mongo_ip, mongo_port, db_name, collection_name):
+        train_sensors_dic = getmongo.getTrainSensorsDic(mongo_ip, mongo_port,
+                                                        db_name,  collection_name)
         train_sensor_data = []
         value = 0
 
@@ -64,5 +65,5 @@ if __name__ == '__main__':
     # connect to the jubatus
     client = jubatus.Classifier(host, port, name)
     lux_classifier = LuxClassifier()
-    lux_classifier.train(client, '127.0.0.1', 27017, 'sensordb')
+    lux_classifier.train(client, '127.0.0.1', 27017, 'sensordb', 'sensors')
     # lux_classifier.predict(client)
