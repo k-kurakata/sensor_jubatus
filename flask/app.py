@@ -29,22 +29,23 @@ def post():
         mongo_server_port   = request.form['mongo_server_port']
         jubatus_server_ip   = request.form['jubatus_server_ip']
         jubatus_server_port = request.form['jubatus_server_port']
-        db_name             = request.form['jubatus_server_port']
+        db_name             = request.form['db_name']
         collection_name     = request.form['jubatus_server_port']
         # POSTで得られる値はstr型なのでintに変換する
         jubatus_server_port = int(jubatus_server_port)
         mongo_server_port   = int(mongo_server_port)
-
-        # jubaclassifierのpredict取得
+        
+        # jubaclassifierのtrainの実行および表示
         client = jubatus.Classifier(jubatus_server_ip, jubatus_server_port, name)
         lux_classifier = LuxClassifier()
-        result_list = lux_classifier.predict(client)
+        result_list = lux_classifier.train(client, mongo_server_ip, mongo_server_port, db_name)
 
         # データフレームの取得
-        convert_mongo = convertMongo()
-        train_sensors_dic = convert_mongo.getTrainSensorsDic()
+        convert_mongo     = convertMongo()
+        train_sensors_dic = convert_mongo.getTrainSensorsDic(mongo_server_ip,
+                                                             mongo_server_port,
+                                                             db_name)
         data_frame        = convert_mongo.getTable(train_sensors_dic)
-
         # とりあえずターミナル上に表示
         print data_frame
 
