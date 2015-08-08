@@ -10,10 +10,7 @@ import csv
 class convertMongo:
 
     def getTrainSensorsDic(self, mongo_ip, mongo_port, db_name, collection_name):
-        f = open('data.csv', 'ab')
-        dataWriter = csv.writer(f)
         convert_mongo      = convertMongo()
-
         mongo_client       = MongoClient(mongo_ip, mongo_port)
         sensor_db          = mongo_client[db_name]
         sensors_collection = sensor_db[collection_name]
@@ -22,16 +19,18 @@ class convertMongo:
         pre = sensor_db.predict
         train_sensors_dic = {}
         db_information    = {}
+        csv_list          = []
         i = 0
         for data in sensors_collection.find():
             del data['_id']
             json_list = json.dumps(data)
             train_sensors_dic[i] = json.loads(json_list)
+            csv_list.append(train_sensors_dic[i])   # データフレーム用に作成
             i += 1
-        csv_list = train_sensors_dic.items()
-        print csv_list
-        dataWriter.writerows(csv_list)
-        f.close()
+        # CSVに落としこむ
+        df = pd.DataFrame(csv_list)
+        df.to_csv('data.csv')
+        print df
         return train_sensors_dic
     
     def postDB(self, result, value):
