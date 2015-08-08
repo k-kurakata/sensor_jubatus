@@ -4,45 +4,67 @@
 from flask import Flask, render_template, request, redirect, url_for
 import numpy as np
 import jubatus
-
+from getmongo import convertMongo
 from lux_classifier import LuxClassifier
 
 # 自身の名称を app という名前でインスタンス化する
 app = Flask(__name__)
 
-# メッセージをランダムに表示するメソッド
-def picked_up():
-    host = '192.168.33.10'
-    port = 9199
-    name = 'test2'
-
-    client = jubatus.Classifier(host, port, name)
-    lux_classifier = LuxClassifier()
-    return lux_classifier.predict(client)
+name = 'IoT'
 
 # ここからウェブアプリケーション用のルーティングを記述
 # index にアクセスしたときの処理
 @app.route('/')
 def index():
-    title = u"ようこそ"
-    message = picked_up()
-    # index.html をレンダリングする
+    title = "IoT + Machine learning"
     return render_template('index.html',
-                           message=message, title=title)
-#
-# # /post にアクセスしたときの処理
-# @app.route('/post', methods=['GET', 'POST'])
-# def post():
-#     title = u"こんにちは"
-#     if request.method == 'POST':
-#         # リクエストフォームから「名前」を取得して
-#         name = request.form['name']
-#         # index.html をレンダリングする
-#         return render_template('index.html',
-#                                name=name, title=title)
-#     else:
-#         # エラーなどでリダイレクトしたい場合はこんな感じで
-#         return redirect(url_for('index'))
+                           name=name, title=title)
+
+@app.route('/post', methods=['GET', 'POST'])
+def post():
+    title = u"Train"
+    if request.method == 'POST':
+        mongo_server_ip     = request.form['mongo_server_ip']
+        mongo_server_port   = request.form['mongo_server_port']
+        jubatus_server_ip   = request.form['jubatus_server_ip']
+        jubatus_server_port = request.form['jubatus_server_port']
+        db_name             = request.form['db_name']
+        collection_name     = request.form['collection_name']
+        # POSTで得られる値はstr型なのでintに変換する
+        jubatus_server_port = int(jubatus_server_port)
+        mongo_server_port   = int(mongo_server_port)
+        
+        # jubaclassifierのtrainの実行および表示
+        client = jubatus.Classifier(jubatus_server_ip, jubatus_server_port, name)
+        lux_classifier = LuxClassifier()
+        result_list = lux_classifier.train(client, mongo_server_ip, mongo_server_port, db_name, collection_name)
+
+        # データフレームの取得
+        convert_mongo     = convertMongo()
+        train_sensors_dic = convert_mongo.getTrainSensorsDic(mongo_server_ip,
+                                                             mongo_server_port,
+                                                             db_name,
+                                                             collection_name)
+        data_frame = convert_mongo.getTable(train_sensors_dic)
+        # とりあえずターミナル上に表示
+        print data_frame
+
+        return render_template('index.html',
+                               title               = title,
+                               jubatus_server_ip   = jubatus_server_ip,
+                               jubatus_server_port = jubatus_server_port,
+                               mongo_server_ip     = mongo_server_ip,
+                               mongo_server_port   = mongo_server_port,
+                               result_list         = result_list)
+    else:
+        # エラーなどでリダイレクトしたい場合はこんな感じで
+        print train_sensor_data
+        return redirect(url_for('hello'))
+
+def jubatusPredict():
+    return render_template('hello.html',
+                           name  = name, 
+                           title = title)
 
 if __name__ == '__main__':
     app.debug = True # デバッグモード有効化

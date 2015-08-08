@@ -5,10 +5,10 @@ from pymongo import MongoClient
 import json
 
 class preMongo:
-    # con = MongoClient('172.16.4.84', 27017)
-    con = MongoClient('192.168.10.3', 27017)
+    con = MongoClient('127.0.0.1', 27017)
     db  = con['sensordb']
-    col = db.sensors_predict
+    # col = db.sensors_predict
+    col = db.sensors
     global dic
     dic = {}
     count = 0

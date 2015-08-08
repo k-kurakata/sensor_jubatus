@@ -18,8 +18,9 @@ getmongo = convertMongo()
 
 class LuxClassifier():
 
-    def train(self, client):
-        train_sensors_dic = getmongo.getTrainSensorsDic()
+    def train(self, client, mongo_ip, mongo_port, db_name, collection_name):
+        train_sensors_dic = getmongo.getTrainSensorsDic(mongo_ip, mongo_port,
+                                                        db_name,  collection_name)
         train_sensor_data = []
         value = 0
 
@@ -35,32 +36,34 @@ class LuxClassifier():
         client.train(train_sensor_data)
         print 'Train Complete!'
 
-    def predict(self, client):
+    def predict(self, client, mongo_ip, mongo_port, db_name):
         getpre  = preMongo()
         dic_pre = getpre.getDic()
         data = []
         predict_result = []
 
         for line in dic_pre:
-            value = dic_pre[line]['value']
-            data.append(Datum({'value':value}))
+            value = dic_pre[line]['Value']
+            data.append(Datum({'Value':value}))
         
         for d in data:
             res = client.classify([d])
-            getmongo.postDB(max(res[0], key=lambda x: x.score).label, str(d.num_values[0][1]))
-            #
-            # sys.stdout.write(max(res[0], key=lambda x: x.score).label)
-            # sys.stdout.write(' ')
-            # sys.stdout.write(str(d.num_values[0][1]))
-            # sys.stdout.write('\n')
+            # getmongo.postDB(max(res[0], key=lambda x: x.score).label, str(d.num_values[0][1]))
 
-            predict_result.append(max(res[0], key=lambda x: x.score).label)
-        
+            sys.stdout.write(max(res[0], key=lambda x: x.score).label)
+            sys.stdout.write(' ')
+            sys.stdout.write(str(d.num_values[0][1]))
+            sys.stdout.write('\n')
+
+            hoge = str(d.num_values[0][1])
+            predict_result.append({'Result': (max(res[0], key=lambda x: x.score).label), 
+                                   'Value'  : hoge})
+
         return predict_result
 
 if __name__ == '__main__':
     # connect to the jubatus
     client = jubatus.Classifier(host, port, name)
     lux_classifier = LuxClassifier()
-    lux_classifier.train(client)
-    lux_classifier.predict(client)
+    lux_classifier.train(client, '127.0.0.1', 27017, 'sensordb', 'sensors')
+    # lux_classifier.predict(client)

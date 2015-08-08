@@ -7,7 +7,6 @@ import json
 class preMongo:
     con = MongoClient('127.0.0.1', 27017)
     db  = con['sensordb']
-    # col = db.sensors_predict
     col = db.predict_sensors
     global dic
     dic = {}
@@ -18,6 +17,7 @@ class preMongo:
         json_list = json.dumps(data)
         dic[count] = json.loads(json_list)
         count += 1
+        print dic
 
     def getDic(self):
         return dic
