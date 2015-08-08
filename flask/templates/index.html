@@ -8,28 +8,28 @@
   <h2>Jubatus</h2>
   <div>
     <label for="jubatus_server_ip">ServerIP</label>
-    <input type="text" id="jubatus_server_ip" name="jubatus_server_ip"/>
+    <input type="text" id="jubatus_server_ip" name="jubatus_server_ip" value="127.0.0.1"/>
     <label for="jubatus_server_port">Port</label>
-    <input type="text" id="jubatus_server_port" name="jubatus_server_port"/>
+    <input type="text" id="jubatus_server_port" name="jubatus_server_port" value="9199"/>
   </div>
 
   <!-- MongoDBの入力フォーム -->
   <h2>MongoDB</h2>
   <div>
     <label for="mongo_server_ip">ServerIP</label>
-    <input type="text" id="mongo_server_ip" name="mongo_server_ip" />
+    <input type="text" id="mongo_server_ip" name="mongo_server_ip" value="127.0.0.1" />
   </div>
   <div>
     <label for="mongo_server_port">port</label>
-    <input type="text" id="mongo_server_port" name="mongo_server_port"/>
+    <input type="text" id="mongo_server_port" name="mongo_server_port" value="27017"/>
   </div>
   <div>
     <label for="db_name">DB Name</label>
-    <input type="text" id="db_name" name="db_name"/>
+    <input type="text" id="db_name" name="db_name" value="sensordb"/>
   </div>
   <div>
     <label for="collection_name">Collection Name</label>
-    <input type="text" id="collection_name" name="collection_name"/>
+    <input type="text" id="collection_name" name="collection_name" value="sensors"/>
   </div>
 
   <div class="button">
@@ -39,9 +39,9 @@
 </form>
 
 <!-- データフレームの表示 -->
-<!-- {% if data_frame %} -->
-<!--   {{ data_frame }}  -->
-<!-- {% endif %}         -->
+{% if data_frame %}
+{{ data_frame }}
+{% endif %}
 
 <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
   <tr>

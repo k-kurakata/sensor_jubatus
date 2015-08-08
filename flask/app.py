@@ -5,13 +5,12 @@ from flask import Flask, render_template, request, redirect, url_for
 import numpy as np
 import jubatus
 from getmongo import convertMongo
-
 from lux_classifier import LuxClassifier
 
 # 自身の名称を app という名前でインスタンス化する
 app = Flask(__name__)
 
-name = 'test2'
+name = 'IoT'
 
 # ここからウェブアプリケーション用のルーティングを記述
 # index にアクセスしたときの処理
@@ -20,10 +19,10 @@ def index():
     title = "IoT + Machine learning"
     return render_template('index.html',
                            name=name, title=title)
-#
+
 @app.route('/post', methods=['GET', 'POST'])
 def post():
-    title = u"Predict"
+    title = u"Train"
     if request.method == 'POST':
         mongo_server_ip     = request.form['mongo_server_ip']
         mongo_server_port   = request.form['mongo_server_port']
@@ -46,7 +45,7 @@ def post():
                                                              mongo_server_port,
                                                              db_name,
                                                              collection_name)
-        data_frame        = convert_mongo.getTable(train_sensors_dic)
+        data_frame = convert_mongo.getTable(train_sensors_dic)
         # とりあえずターミナル上に表示
         print data_frame
 
