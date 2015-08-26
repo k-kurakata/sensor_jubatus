@@ -30,7 +30,8 @@ class convertMongo:
         # CSVに落としこむ
         df = pd.DataFrame(csv_list)
         df.to_csv('data.csv')
-        print df
+        # print df[["Name", "Value"]]
+        # print df.describe()
         return train_sensors_dic
     
     def postDB(self, result, value):

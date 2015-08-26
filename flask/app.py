@@ -6,6 +6,7 @@ import numpy as np
 import jubatus
 from getmongo import convertMongo
 from lux_classifier import LuxClassifier
+from readCSV import ReadCSV
 
 # 自身の名称を app という名前でインスタンス化する
 app = Flask(__name__)
@@ -48,14 +49,23 @@ def post():
         data_frame = convert_mongo.getTable(train_sensors_dic)
         # とりあえずターミナル上に表示
         print data_frame
+        
+        # CSV関連項目
+        readCSV = ReadCSV()
+        value_list = readCSV.outPutData()
+        name_list  = readCSV.outPutNameList()
+        print len(name_list)
 
-        return render_template('index.html',
+        # return render_template('index.html',
+        return render_template('plot.html',
                                title               = title,
                                jubatus_server_ip   = jubatus_server_ip,
                                jubatus_server_port = jubatus_server_port,
                                mongo_server_ip     = mongo_server_ip,
                                mongo_server_port   = mongo_server_port,
-                               result_list         = result_list)
+                               result_list         = result_list,
+                               value_list          = value_list,
+                               name_list           = name_list)
     else:
         # エラーなどでリダイレクトしたい場合はこんな感じで
         print train_sensor_data
