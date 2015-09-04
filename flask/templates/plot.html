@@ -12,7 +12,6 @@ ${demo.css}
 		<script type="text/javascript">
 $(function () {
     $('#container').highcharts({
-      {% if value_list %}
         chart: {
             type: 'scatter',
             zoomType: 'xy'
@@ -71,12 +70,14 @@ $(function () {
                 }
             }
         },
+        {% if value_list %}
         series: [
         {% for name in name_list %}
+        {% loop = loop + 1 %}
         {
           name: '{{ name }}',
-            color: 'rgba(223, 83, 83, .5)',
-            data: {{ value_list }} 
+          color: 'rgba(223, 83, 83, .5)',
+          data: {{ value_list[loop] }} 
         },
         {% endfor %}
         ]

@@ -53,9 +53,11 @@ def post():
         # CSV関連項目
         readCSV = ReadCSV()
         value_list = readCSV.outPutData()
+        print value_list
         name_list  = readCSV.outPutNameList()
         print len(name_list)
 
+        loop = 0
         # return render_template('index.html',
         return render_template('plot.html',
                                title               = title,
@@ -64,6 +66,7 @@ def post():
                                mongo_server_ip     = mongo_server_ip,
                                mongo_server_port   = mongo_server_port,
                                result_list         = result_list,
+                               loop                = loop,
                                value_list          = value_list,
                                name_list           = name_list)
 

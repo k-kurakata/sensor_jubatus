@@ -8,15 +8,14 @@ class ReadCSV():
         df = pd.read_csv('csv/data.csv')
         name_list   = self.outPutNameList()
         value_list  = [0]*len(name_list)
-        number_list =  df['Unnamed: 0']
-        value_list  =  df[name_list[4]]
-        listx = [0] * len(value_list)
-        i = 0
 
-        for data in value_list:
-            listx[i] = data
+        number_list =  df['Unnamed: 0']
+        i = 0
+        for name in name_list:
+            if name != "" :
+                value_list[i]  =  df[name]
             i += 1
-        return listx
+        return value_list
 
     def outPutNameList(self):
         f = open('csv/data.csv', "r")
