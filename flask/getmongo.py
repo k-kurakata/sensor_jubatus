@@ -30,8 +30,8 @@ class convertMongo:
         # CSVに落としこむ
         df = pd.DataFrame(csv_list)
         describe = df.describe()
-        df.to_csv('data.csv')
-        describe.to_csv('describe.csv')
+        df.to_csv('csv/data.csv')
+        describe.to_csv('csv/describe.csv')
         # print df[["Name", "Value"]]
         # print df.describe()
         return train_sensors_dic

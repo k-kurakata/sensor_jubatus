@@ -5,7 +5,7 @@ import csv
 
 class ReadCSV():
     def outPutData(self):
-        df = pd.read_csv('data.csv')
+        df = pd.read_csv('csv/data.csv')
         number_list =  df['Unnamed: 0']
         value_list  =  df['Value']
         listx = [0] * len(value_list)
@@ -17,7 +17,7 @@ class ReadCSV():
         return listx
 
     def outPutNameList(self):
-        f = open('data.csv', "r")
+        f = open('csv/data.csv', "r")
         reader = csv.reader(f)
         for row in reader:
             name_list =  row
