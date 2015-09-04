@@ -26,7 +26,7 @@ $(function () {
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Height (cm)'
+                text: 'Time'
             },
             startOnTick: true,
             endOnTick: true,
@@ -79,7 +79,6 @@ $(function () {
             data: {{ value_list }} 
         },
         {% endfor %}
-        {}
         ]
         {% endif %}
     });
