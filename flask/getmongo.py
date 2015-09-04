@@ -29,7 +29,9 @@ class convertMongo:
             i += 1
         # CSVに落としこむ
         df = pd.DataFrame(csv_list)
+        describe = df.describe()
         df.to_csv('data.csv')
+        describe.to_csv('describe.csv')
         # print df[["Name", "Value"]]
         # print df.describe()
         return train_sensors_dic

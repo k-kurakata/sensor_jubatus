@@ -2,8 +2,10 @@
 <script type="text/javascript" src="../static/js/jquery.csv2table-0.02-b-4.8.js"></script>
 <script>
 $(function(){
-  $('#table_disp').csv2table('../data.csv');
+  $('#table_describe').csv2table('../describe.csv');
+  $('#table_data').csv2table('../data.csv');
 });
 </script>
   
-<div id="table_disp"></div>
+<div id="table_describe"></div>
+<div id="table_data"></div>
