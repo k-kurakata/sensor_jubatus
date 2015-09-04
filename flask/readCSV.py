@@ -6,8 +6,10 @@ import csv
 class ReadCSV():
     def outPutData(self):
         df = pd.read_csv('csv/data.csv')
+        name_list   = self.outPutNameList()
+        value_list  = [0]*len(name_list)
         number_list =  df['Unnamed: 0']
-        value_list  =  df['Value']
+        value_list  =  df[name_list[4]]
         listx = [0] * len(value_list)
         i = 0
 
@@ -27,11 +29,4 @@ class ReadCSV():
 if __name__ == '__main__':
     hoge = ReadCSV()
     # hoge.outPutData()
-    name = hoge.outPutNameList()
-    print name
-
-
-# print number_list[3]
-# print value_list
-# print df.describe()
-
+    print hoge.outPutData()
