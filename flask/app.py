@@ -66,6 +66,7 @@ def post():
                                result_list         = result_list,
                                value_list          = value_list,
                                name_list           = name_list)
+
     else:
         # エラーなどでリダイレクトしたい場合はこんな感じで
         print train_sensor_data
