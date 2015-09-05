@@ -52,10 +52,10 @@ def post():
         
         # CSV関連項目
         readCSV = ReadCSV()
-        value_list = readCSV.outPutData()
+        dataframe = readCSV.outPutDataFrame()
+        value_list = readCSV.outPutData(dataframe[3])
+        name_list = readCSV.outPutNameList()
         print value_list
-        name_list  = readCSV.outPutNameList()
-        print len(name_list)
 
         loop = 0
         # return render_template('index.html',
@@ -66,9 +66,9 @@ def post():
                                mongo_server_ip     = mongo_server_ip,
                                mongo_server_port   = mongo_server_port,
                                result_list         = result_list,
-                               loop                = loop,
                                value_list          = value_list,
                                name_list           = name_list)
+
 
     else:
         # エラーなどでリダイレクトしたい場合はこんな感じで
