@@ -38,41 +38,9 @@
 
 </form>
 
-<!-- データフレームの表示 -->
-{% if data_frame %}
-{{ data_frame }}
-{% endif %}
-
-<table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
-  <tr>
-    <th bgcolor="#EE0000"><font color="#FFFFFF">Value</font></th>
-    <th bgcolor="#EE0000" width="150"><font color="#FFFFFF">Result</font></th>
-  </tr>
-
-  <!-- Valueのカラム -->
-  <tr>
-  {% if result_list %}
-    {% for a in result_list %}
-      <td bgcolor="#99CC00" align="right" nowrap>
-        {{ result_list[loop.index0]['Value'] }}
-     </td>
-    {% endfor %}
-  {% endif %}
-   
-  <!-- Resultのカラム -->
-  {% if result_list %}
-    {% for a in result_list %}
-      <td bgcolor="#FFFFFF" valign="top" width="150">
-        {{ result_list[loop.index0]['Result'] }}
-      </td>
-    {% endfor %}
-  {% endif %}
-
-  </tr>
-</table>
-
-<!-- グラフの表示 -->
-{% if value_list %}
-
-{% endif %}
+<form action="/load" method="post">
+  <div class="button">
+    <button type="submit">ReadTrainData</button>
+  </div>
+</form>
 {% endblock %}
