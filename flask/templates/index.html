@@ -31,19 +31,24 @@
     <label for="collection_name">Collection Name</label>
     <input type="text" id="collection_name" name="collection_name" value="sensors"/>
   </div>
+</form>
 
+<form action="load" method="post">
   <div class="button">
     <button type="submit">Load Data</button>
   </div>
-  <select ng-model="data.id" ng-options="v.id as v.name for v in items">
-    <option value="">未選択</option>
+  {% if name_list %}
+  <select name="name">
+  {% for name in name_list %}
+    <option value="name">{{ name }}</option>
+  {% endfor %}
   </select>
-
 </form>
 
 <form action="/graph" method="post">
   <div class="button">
-    <button type="submit">ReadTrainData</button>
+    <button type="submit">Print Graph</button>
   </div>
 </form>
+{% endif %}
 {% endblock %}
