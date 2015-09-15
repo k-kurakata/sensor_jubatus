@@ -68,6 +68,15 @@ def post():
 def load():
     readCSV = ReadCSV()
     dataframe = readCSV.outPutDataFrame()
+    name_list = readCSV.outPutNameList()
+
+    return render_templata('index.html',
+                            name_list = name_list)
+
+@app.route('/graph', methods=['GET', 'POST'])
+def graph():
+    readCSV = ReadCSV()
+    dataframe = readCSV.outPutDataFrame()
     value_list = readCSV.outPutData(dataframe[3])
     name_list = readCSV.outPutNameList()
     print value_list

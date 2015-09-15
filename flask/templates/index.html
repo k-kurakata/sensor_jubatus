@@ -33,12 +33,15 @@
   </div>
 
   <div class="button">
-    <button type="submit">confirm</button>
+    <button type="submit">Load Data</button>
   </div>
+  <select ng-model="data.id" ng-options="v.id as v.name for v in items">
+    <option value="">未選択</option>
+  </select>
 
 </form>
 
-<form action="/load" method="post">
+<form action="/graph" method="post">
   <div class="button">
     <button type="submit">ReadTrainData</button>
   </div>
