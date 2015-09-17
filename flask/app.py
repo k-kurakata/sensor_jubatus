@@ -17,13 +17,58 @@ name = 'IoT'
 # index にアクセスしたときの処理
 @app.route('/')
 def index():
-    title = "IoT + Machine learning"
+    title = 'Top'
     return render_template('index.html',
                            name=name, title=title)
 
 @app.route('/post', methods=['GET', 'POST'])
 def post():
     title = u"Train"
+
+        # データフレームの取得
+        # convert_mongo     = convertMongo()
+        # train_sensors_dic = convert_mongo.getTrainSensorsDic(mongo_server_ip,
+        #                                                      mongo_server_port,
+        #                                                      db_name,
+        #                                                      collection_name)
+        # data_frame = convert_mongo.getTable(train_sensors_dic)
+        # # とりあえずターミナル上に表示
+        # print data_frame
+        
+        # CSV関連項目
+        # return render_template('index.html',
+
+@app.route('/load', methods=['GET', 'POST'])
+def load():
+    readCSV = ReadCSV()
+    dataframe = readCSV.outPutDataFrame()
+    name_list = readCSV.outPutNameList()
+
+    return render_template('index.html',
+                            name_list = name_list)
+
+@app.route('/graph', methods=['GET', 'POST'])
+def graph():
+    if request.method == 'POST':
+        select_name = request.form['name']
+    readCSV = ReadCSV()
+    dataframe = readCSV.outPutDataFrame()
+    name_list  = readCSV.outPutNameList()
+    i = 0
+    dic ={}
+    for name in name_list:
+        if name != "":
+            dic.update({name : i})
+            i += 1
+    value_list = readCSV.outPutData(dataframe[dic[select_name]])
+
+    return render_template('plot.html',
+                           value_list = value_list, 
+                           name_list  = name_list)
+
+@app.route('/train', methods=['GET', 'POST'])
+def train():
+    title = "IoT + Machine learning"
     if request.method == 'POST':
         mongo_server_ip     = request.form['mongo_server_ip']
         mongo_server_port   = request.form['mongo_server_port']
@@ -40,19 +85,7 @@ def post():
         lux_classifier = LuxClassifier()
         result_list = lux_classifier.train(client, mongo_server_ip, mongo_server_port, db_name, collection_name)
 
-        # データフレームの取得
-        convert_mongo     = convertMongo()
-        train_sensors_dic = convert_mongo.getTrainSensorsDic(mongo_server_ip,
-                                                             mongo_server_port,
-                                                             db_name,
-                                                             collection_name)
-        data_frame = convert_mongo.getTable(train_sensors_dic)
-        # とりあえずターミナル上に表示
-        print data_frame
-        
-        # CSV関連項目
-        # return render_template('index.html',
-        return render_template('plot.html',
+        return render_template('index.html',
                                title               = title,
                                jubatus_server_ip   = jubatus_server_ip,
                                jubatus_server_port = jubatus_server_port,
@@ -63,28 +96,6 @@ def post():
         # エラーなどでリダイレクトしたい場合はこんな感じで
         print train_sensor_data
         return redirect(url_for('hello'))
-
-@app.route('/load', methods=['GET', 'POST'])
-def load():
-    readCSV = ReadCSV()
-    dataframe = readCSV.outPutDataFrame()
-    name_list = readCSV.outPutNameList()
-
-    return render_template('index.html',
-                            name_list = name_list)
-
-@app.route('/graph', methods=['GET', 'POST'])
-def graph():
-    readCSV = ReadCSV()
-    dataframe = readCSV.outPutDataFrame()
-    value_list = readCSV.outPutData(dataframe[3])
-    name_list  = readCSV.outPutNameList()
-    print value_list
-
-    return render_template('plot.html',
-                           value_list = value_list, 
-                           name_list  = name_list)
-
 if __name__ == '__main__':
     app.debug = True # デバッグモード有効化
     app.run(host='0.0.0.0') # どこからでもアクセス可能に

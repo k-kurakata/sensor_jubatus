@@ -37,18 +37,26 @@
   <div class="button">
     <button type="submit">Load Data</button>
   </div>
-  {% if name_list %}
-  <select name="name">
-  {% for name in name_list %}
-    <option value="name">{{ name }}</option>
-  {% endfor %}
-  </select>
 </form>
 
 <form action="/graph" method="post">
+  {% if name_list %}
+    <!-- <select name="name" onchange="this.form.submit()"> -->
+    <select name="name">
+  {% for name in name_list %}
+  <option value={{ name }}>{{ name }}</option>
+  {% endfor %}
+  </select>
   <div class="button">
-    <button type="submit">Print Graph</button>
+    <button type="submit" value=value>Print Graph</button>
+  </div>
+  {% endif %}
+</form>
+
+
+<form action="/train" method="post">
+  <div class="button">
+    <button type="submit">Start Machine Learning</button>
   </div>
 </form>
-{% endif %}
 {% endblock %}
