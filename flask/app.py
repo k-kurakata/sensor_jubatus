@@ -7,6 +7,7 @@ import jubatus
 from getmongo import convertMongo
 from lux_classifier import LuxClassifier
 from readCSV import ReadCSV
+import pandas as pd
 
 # 自身の名称を app という名前でインスタンス化する
 app = Flask(__name__)
@@ -41,7 +42,6 @@ def post():
 @app.route('/load', methods=['GET', 'POST'])
 def load():
     readCSV = ReadCSV()
-    dataframe = readCSV.outPutDataFrame()
     name_list = readCSV.outPutNameList()
 
     return render_template('index.html',
@@ -51,16 +51,33 @@ def load():
 def graph():
     if request.method == 'POST':
         select_name = request.form['name']
-    readCSV = ReadCSV()
-    dataframe = readCSV.outPutDataFrame()
+        # index_start = request.form['start']
+        # index_end   = request.form['end']
+    readCSV    = ReadCSV()
+    dataframe  = readCSV.outPutDataFrame()
     name_list  = readCSV.outPutNameList()
     i = 0
     dic ={}
     for name in name_list:
-        if name != "":
+        if name != "":   # indexは無視する
             dic.update({name : i})
             i += 1
     value_list = readCSV.outPutData(dataframe[dic[select_name]])
+    # print dataframe[dic[select_name]]
+
+    return render_template('plot.html',
+                           value_list = value_list, 
+                           name_list  = name_list)
+
+@app.route('/graph/edit', methods=['GET', 'POST'])
+def edit():
+    if request.method == 'POST':
+        index_start = request.form['start']
+        index_end   = request.form['end']
+
+    readCSV    = ReadCSV()
+    dataframe  = readCSV.outPutDataFrame()
+    readCSV.dfToCsv(dataframe, index_start, index_end)
 
     return render_template('plot.html',
                            value_list = value_list, 

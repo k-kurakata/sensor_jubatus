@@ -29,6 +29,8 @@ class convertMongo:
             i += 1
         # CSVに落としこむ
         df = pd.DataFrame(csv_list)
+        # print df.ix[1160 : 1208]
+        print df
         describe = df.describe()
         df.to_csv('csv/data.csv')
         describe.to_csv('csv/describe.csv')

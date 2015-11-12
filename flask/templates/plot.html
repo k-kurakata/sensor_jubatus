@@ -18,15 +18,15 @@ $(function () {
             zoomType: 'xy'
         },
         title: {
-            text: 'Height Versus Weight of 507 Individuals by Gender'
+            text: 'train data tuning'
         },
         subtitle: {
-            text: 'Source: Heinz  2003'
+            text: ''
         },
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Height (cm)'
+                text: 't'
             },
             startOnTick: true,
             endOnTick: true,
@@ -67,7 +67,7 @@ $(function () {
                 },
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x} cm, {point.y} kg'
+                    pointFormat: '{point.x}(value) , {point.y}(t) '
                 }
             }
         },
@@ -84,6 +84,16 @@ $(function () {
 		</script>
 	</head>
 	<body>
+    <form action="/graph/edit" method="post">
+      <div>
+        <label for="text">消したいindex</label>
+        <input type="text" id="start" name="start" value="" />
+        <input type="text" id="end" name="end" value="" />
+      </div>
+      <div class="button">
+        <button type="submit" value=value>delete!</button>
+      </div>
+    </form>
 <script src="../static/js/highcharts.js"></script>
 <script src="../static/js/exporting.js"></script>
 
