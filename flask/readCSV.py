@@ -39,15 +39,16 @@ class ReadCSV():
         del_end   = int(del_end)
         # edit_df   = df.ix[del_start : del_end]
         edit_df_start = df.ix[0:del_start]
-        edit_df_end   = df.ix[del_end:200]
+        edit_df_end   = df.ix[del_end:]
         edit_df = pd.concat([edit_df_start, edit_df_end])
         edit_describe  = edit_df.describe()
-        edit_df.to_csv('csv/edit_data.csv')
-        edit_describe.to_csv('csv/edit_describe.csv')
+        edit_df.to_csv('csv/edit_data.csv', index=False)
+        edit_describe.to_csv('csv/edit_describe.csv', index=False)
 
 if __name__ == '__main__':
     hoge = ReadCSV()
     dataframe = hoge.outPutDataFrame()
+    print dataframe
     # print hoge.outPutData(dataframe[1])
     hoge.dfToCsv(10, 100)
     # print dataframe
