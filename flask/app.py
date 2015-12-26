@@ -65,9 +65,11 @@ def graph():
     value_list = readCSV.outPutData(dataframe[dic[select_name]])
     # print dataframe[dic[select_name]]
 
-    return render_template('plot.html',
-                           value_list = value_list, 
-                           name_list  = name_list)
+    return render_template(
+            'plot.html',
+            value_list = value_list, 
+            name_list  = name_list
+            )
 
 @app.route('/graph/edit', methods=['GET', 'POST'])
 def edit():
@@ -77,11 +79,15 @@ def edit():
 
     readCSV    = ReadCSV()
     dataframe  = readCSV.outPutDataFrame()
-    readCSV.dfToCsv(dataframe, index_start, index_end)
+    name_list  = readCSV.outPutNameList()
+    value_list = readCSV.outPutData(dataframe[dic[select_name]])
+    readCSV.dfToCsv(index_start, index_end)
 
-    return render_template('plot.html',
-                           value_list = value_list, 
-                           name_list  = name_list)
+    return render_template(
+            'plot.html',
+            value_list = value_list, 
+            name_list  = name_list
+            )
 
 @app.route('/train', methods=['GET', 'POST'])
 def train():
@@ -108,7 +114,8 @@ def train():
                                jubatus_server_port = jubatus_server_port,
                                mongo_server_ip     = mongo_server_ip,
                                mongo_server_port   = mongo_server_port,
-                               result_list         = result_list)
+                               result_list         = result_list
+                               )
     else:
         # エラーなどでリダイレクトしたい場合はこんな感じで
         print train_sensor_data
