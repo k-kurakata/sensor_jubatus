@@ -35,7 +35,7 @@
 
 <form action="load" method="post">
   <div class="button">
-    <button type="submit">Load Data</button>
+    <button type="submit" class="btn btn-default">Load Data</button>
   </div>
 </form>
 
@@ -48,7 +48,7 @@
   {% endfor %}
   </select>
   <div class="button">
-    <button type="submit" value=value>Print Graph</button>
+    <button type="submit" class="btn btn-default" value=value>Print Graph</button>
   </div>
   {% endif %}
 </form>
@@ -56,7 +56,7 @@
 
 <form action="/train" method="post">
   <div class="button">
-    <button type="submit">Start Machine Learning</button>
+    <button type="submit" class="btn btn-success">Start Machine Learning</button>
   </div>
 </form>
 {% endblock %}

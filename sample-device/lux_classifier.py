@@ -27,22 +27,22 @@ class LuxClassifier():
         for line in dic_pre:
             value = dic_pre[line]['Value']
             data.append(Datum({'Value':value}))
-        
+
         for d in data:
             res = client.classify([d])
-            # getmongo.postDB(max(res[0], key=lambda x: x.score).label, str(d.num_values[0][1]))
+            getmongo.postDB(max(res[0], key=lambda x: x.score).label, str(d.num_values[0][1]))
 
-            # sys.stdout.write(max(res[0], key=lambda x: x.score).label)
-            # sys.stdout.write(' ')
-            # sys.stdout.write(str(d.num_values[0][1]))
-            # sys.stdout.write('\n')
+            sys.stdout.write(max(res[0], key=lambda x: x.score).label)
+            sys.stdout.write(' ')
+            sys.stdout.write(str(d.num_values[0][1]))
+            sys.stdout.write('\n')
 
             hoge = str(d.num_values[0][1])
             result = max(res[0], key=lambda x: x.score).label   
             predict_result.update({'Result': result, 
-                                   'Value'  : hoge})
+                'Value'  : hoge})
 
-        return predict_result['Result']
+            return predict_result['Result']
 
 if __name__ == '__main__':
     # connect to the jubatus
